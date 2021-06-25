@@ -31,10 +31,16 @@ public class ShopUI : MonoBehaviour
     protected const int k_AdRewardCoins = 100;
 #endif
 
-	void Start ()
+    //TungNS
+    [SerializeField] private GameObject cheatCS;
+
+    private void Awake() {
+        cheatCS.SetActive(false);
+    }
+
+    void Start ()
     {
         PlayerData.Create();
-
         consumableDatabase.Load();
         CoroutineHandler.StartStaticCoroutine(CharacterDatabase.LoadDatabase());
         CoroutineHandler.StartStaticCoroutine(ThemeDatabase.LoadDatabase());
@@ -106,14 +112,15 @@ public class ShopUI : MonoBehaviour
 
 	public void CheatCoin()
 	{
-#if !UNITY_EDITOR && !DEVELOPMENT_BUILD
-        return ; //you can't cheat in production build
-#endif
+        //#if !UNITY_EDITOR && !DEVELOPMENT_BUILD
+        //        return ; //you can't cheat in production build
+        //#endif
 
-        PlayerData.instance.coins += k_CheatCoins;
-		PlayerData.instance.premium += k_CheatPremium;
-		PlayerData.instance.Save();
-	}
+        //        PlayerData.instance.coins += k_CheatCoins;
+        //		PlayerData.instance.premium += k_CheatPremium;
+        //		PlayerData.instance.Save();
+        cheatCS.SetActive(true);
+    }
 
 #if UNITY_ADS
     public void ShowRewardedAd()

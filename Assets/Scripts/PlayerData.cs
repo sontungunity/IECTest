@@ -77,14 +77,14 @@ public class PlayerData
         Save();
     }
 
-    public void Add(Consumable.ConsumableType type)
+    public void Add(Consumable.ConsumableType type,int amount = 1)
     {
         if (!consumables.ContainsKey(type))
         {
             consumables[type] = 0;
         }
 
-        consumables[type] += 1;
+        consumables[type] += amount;
 
         Save();
     }

@@ -13,4 +13,9 @@ public class ShopItemListItem : MonoBehaviour
 
 	public Sprite buyButtonSprite;
 	public Sprite disabledButtonSprite;
+    [SerializeField] private ParticleSystem particleSystem;
+
+    public void PlayParticle() {
+        particleSystem.Play();
+    }
 }
