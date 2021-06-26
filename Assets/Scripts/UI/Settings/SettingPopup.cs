@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
@@ -21,10 +22,17 @@ public class SettingPopup : MonoBehaviour
     protected const string k_MasterVolumeFloatName = "MasterVolume";
     protected const string k_MusicVolumeFloatName = "MusicVolume";
     protected const string k_MasterSFXVolumeFloatName = "MasterSFXVolume";
-    
+
+    [SerializeField] private RectTransform content;
+    private Rect safeArea => Screen.safeArea;
+    private Tween tween;
+
     public void Open()
     {
         gameObject.SetActive(true);
+        Vector2 startPosition = new Vector2(-safeArea.size.x/2f,0f);
+        content.anchoredPosition = startPosition;
+        tween = content.DOAnchorPos(Vector2.zero, 0.5f);
         UpdateUI();
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -9,10 +10,15 @@ public class MissionUI : MonoBehaviour
     public AssetReference missionEntryPrefab;
     public AssetReference addMissionButtonPrefab;
 
+    [SerializeField] private RectTransform content;
+    private Rect safeArea => Screen.safeArea;
+    private Tween tween;
     public IEnumerator Open()
     {
         gameObject.SetActive(true);
-
+        Vector2 startPosition = new Vector2(-safeArea.size.x/2f,0f);
+        content.anchoredPosition = startPosition;
+        tween = content.DOAnchorPos(Vector2.zero, 0.5f);
         foreach (Transform t in missionPlace)
             Addressables.ReleaseInstance(t.gameObject);
 

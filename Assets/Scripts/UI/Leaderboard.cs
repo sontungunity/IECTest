@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using DG.Tweening;
+
 
 // Prefill the info on the player data, as they will be used to populate the leadboard.
 public class Leaderboard : MonoBehaviour
@@ -9,11 +11,16 @@ public class Leaderboard : MonoBehaviour
 	public HighscoreUI playerEntry;
 	public bool forcePlayerDisplay;
 	public bool displayPlayer = true;
+	[SerializeField] private RectTransform content;
+	private Rect safeArea => Screen.safeArea;
+	private Tween tween;
 
 	public void Open()
 	{
 		gameObject.SetActive(true);
-
+		Vector2 startPosition = new Vector2(-safeArea.size.x/2f,0f);
+		content.anchoredPosition = startPosition;
+		tween = content.DOAnchorPos(Vector2.zero, 0.5f);
 		Populate();
 	}
 
